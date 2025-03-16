@@ -5,16 +5,16 @@ import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
 
 def get_title(x):
-    """extract the title "Mr./Mrs." from passenger names
+    '''extract the title "Mr./Mrs." from passenger names
     Names are generally in the format "lastname, title first name
-    """
+    '''
     title = x.split(r', ')[1]
     title = title.replace('the', '')
     title = title.split()[0]
     return title
 
 def ticket_number(x):
-    """extract the ticket number"""
+    '''extract the ticket number'''
     try:
         num = float(x.split(" ")[-1])
     except: 
@@ -22,15 +22,15 @@ def ticket_number(x):
     return num
     
 def ticket_item(x):
-    """extract the ticket type"""
+    '''extract the ticket type'''
     items = x.split(" ")
     if len(items) == 1:
         return "UNK"
     return "_".join(items[0:-1])
 
 def cabin_letter(x):
-    """extract the cabin group
-    if multiple cabins, only grabs the first"""
+    '''extract the cabin group
+    if multiple cabins, only grabs the first'''
     if pd.isna(x):
         return 'UNK'
     else:
@@ -38,8 +38,8 @@ def cabin_letter(x):
         return items[0]
             
 def cabin_number(x):
-    """extracts the cabin number
-    if multiple cabins, only grab the first"""
+    '''extracts the cabin number
+    if multiple cabins, only grab the first'''
     if pd.isna(x):
         return np.nan
     else:
@@ -50,9 +50,9 @@ def cabin_number(x):
             return float(items[1])
 
 def preprocess_data(df):
-    """combine preprocessing functions to modify the dataframe
+    '''combine preprocessing functions to modify the dataframe
     returns the modified dataframe
-    """
+    '''
     df['Title'] = df['Name'].apply(get_title)   
     df["Ticket_number"] = df["Ticket"].apply(ticket_number)
     df["Ticket_item"] = df["Ticket"].apply(ticket_item)     
@@ -62,9 +62,9 @@ def preprocess_data(df):
 
 
 def impute_data(df):
-    """fill in missing data with Unknown or median
+    '''fill in missing data with Unknown or median
     return modified dataframe"
-    """"
+    '''
     df['Embarked'] = df['Embarked'].fillna('UNK')
     df['Cabin'] = df['Cabin'].fillna('UNK')    
     df['Age'] = df['Age'].fillna(df['Age'].median())
@@ -74,7 +74,7 @@ def impute_data(df):
     return df
 
 class Columns(BaseEstimator, TransformerMixin):
-    """class to keep track of columns names after sklearn FeatureUnion"""
+    '''class to keep track of columns names after sklearn FeatureUnion'''
     def __init__(self, names=None):
         self.names = names
 

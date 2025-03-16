@@ -3,11 +3,14 @@ Create a Model Facts label to improve the transparency of your model when commun
 This label provides a framework to interrogate models for biases. 
 It provides information required for comparability in a simple and flexible format. 
 
-![Model Facts](https://github.com/jhzsquared/model_facts.png)
+## Framework
+![Model Facts](https://raw.githubusercontent.com/jhzsquared/model_facts/main/model_facts.png)
 
 ## Installation
 It can be installed from PyPI using: 
+
 ```pip install great_tables```
+
 Note: the template notebooks are only available in the source distribution.
 
 You can also clone this repository and install required packages through:
@@ -30,10 +33,10 @@ Model Facts is designed to be flexible, whether you have pre-formatted data and 
 Note: the template currently only supports metrics from `scikit-learn.metrics`, binary classification, and regression models. For more complex modeling problems, please reference the other workflows.
 
 ### DIY
-The `examples/model_facts_titanic.ipynb` notebook provides a simple example of how you can use Model Facts labels on your own dataset with more flexibility through the `mfw.ModelFacts` class.
+The `demo/model_facts_titanic.ipynb` notebook provides a simple example of how you can use Model Facts labels on your own dataset with more flexibility through the `modelfacts.ModelFacts` class.
 
 ### Extra DIY
-Use the `mfw.ModelFactsLabel` class and pass in your own pre-calculated statistics.
+Use the `modelfacts.ModelFactsLabel` class and pass in your own pre-calculated statistics.
 
 ```
 model_facts_data = (admin_data, accuracy_data, demographic_data)
@@ -50,7 +53,7 @@ Please make sure to update tests as appropriate.
 Please reach out if you are interested in joining the team for continued development of this project
 
 ## Limitations
-The automated calculation code currently only supports binary classification and regressions. But users can use their own calculations and the `mfw.ModelFactsLabel` to generate a label from their own statistics
+The automated calculation code currently only supports binary classification and regressions. But users can use their own calculations and the `modelfacts.ModelFactsLabel` to generate a label from their own statistics
 
 ## License
 Model Facts is licensed under the MIT license.

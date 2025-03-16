@@ -1,4 +1,4 @@
-from great_tables import GT, loc, style, md, html
+from great_tables import GT, loc, style, md
 import pandas as pd
 import numpy as np
 
@@ -15,7 +15,7 @@ class ModelFacts():
     '''
     age_bins = [0, 18, 25, 35, 50, 65, np.inf]
     labels = ['<18','18-24', '25-34', '35-49', '50-64', '64+']
-    def __init__(self, df, true, pred, baseline, st_func, t_func, classification):
+    def __init__(self, df, true, pred, baseline, st_func, t_func, classification = True):
         '''Set key Model Facts details
         Parameters
         ----------
@@ -33,7 +33,7 @@ class ModelFacts():
         t_func: str
             name of the metric used to optimize the model
             (only supports sklearn.metrics names)
-        classification: bool
+        classification: bool, optional
             True if it is a classification model. 
             False if a regression (continuous prediction) model
         '''
@@ -267,7 +267,7 @@ class ModelFactsLabel():
                 ],
                 locations=loc.row_groups()
             )
-            .tab_source_note(html(f'<span style="color:red">**{warning}**</span>'))
+            .tab_source_note(md(f'<span style="color:red">**{warning}**</span>'))
             .tab_source_note(source)
             .tab_source_note(md(f'<small>{instructions}</small>'))
             .cols_label({'0':'', '1': '', '2':''})

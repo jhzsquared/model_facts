@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>model_facts_example</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>model_facts_titanic</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7553,10 +7553,11 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># load packages</span>
+<span class="c1"># ! pip install modelfacts</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">tree</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">MinMaxScaler</span>
@@ -7564,7 +7565,8 @@ a.anchor-link {
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.pipeline</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">FeatureUnion</span><span class="p">,</span> <span class="n">make_pipeline</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">src.examples.preprocess</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tpp</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">modelfacts.examples</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocess</span> <span class="k">as</span> <span class="n">tpp</span>
 <span class="n">seed</span> <span class="o">=</span> <span class="mi">28</span> <span class="c1"># set random seed</span>
 </pre></div>
 </div>
@@ -7576,11 +7578,11 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># read in data</span>
-<span class="n">filepath</span> <span class="o">=</span> <span class="s1">'data/train.csv'</span>
+<span class="n">filepath</span> <span class="o">=</span> <span class="s1">'../data/train.csv'</span>
 <span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
 <span class="n">train_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -7593,7 +7595,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7730,7 +7732,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># clean data</span>
@@ -7748,7 +7750,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -7900,7 +7902,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># format data for modeling</span>
@@ -7936,7 +7938,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># define model pipeline objects</span>
@@ -7966,7 +7968,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># create model pipeline </span>
@@ -7985,7 +7987,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># define hyperparameters to grid search over</span>
@@ -8003,7 +8005,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># train the model</span>
@@ -8018,7 +8020,7 @@ a.anchor-link {
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
@@ -8455,22 +8457,22 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                                                         ('onehotencoder',
                                                                                          OneHotEncoder(categories=[['female',
                                                                                                                     'male'...
-                                                                                                                    'SW/PP',
-                                                                                                                    'S.C./PARIS',
-                                                                                                                    'STON/O_2.', ...],
+                                                                                                                    'SCO/W',
+                                                                                                                    'S.O./P.P.',
+                                                                                                                    'A/4', ...],
                                                                                                                    ['C',
-                                                                                                                    'F',
-                                                                                                                    'E',
-                                                                                                                    'G',
                                                                                                                     'F '
                                                                                                                     'G',
-                                                                                                                    'D',
+                                                                                                                    'F '
+                                                                                                                    'E',
+                                                                                                                    'G',
                                                                                                                     'UNK',
-                                                                                                                    'A',
-                                                                                                                    'F '
                                                                                                                     'E',
+                                                                                                                    'F',
+                                                                                                                    'B',
                                                                                                                     'T',
-                                                                                                                    'B']],
+                                                                                                                    'D',
+                                                                                                                    'A']],
                                                                                                        drop='first',
                                                                                                        handle_unknown='ignore',
                                                                                                        min_frequency=10,
@@ -8500,22 +8502,22 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                                                         ('onehotencoder',
                                                                                          OneHotEncoder(categories=[['female',
                                                                                                                     'male'...
-                                                                                                                    'SW/PP',
-                                                                                                                    'S.C./PARIS',
-                                                                                                                    'STON/O_2.', ...],
+                                                                                                                    'SCO/W',
+                                                                                                                    'S.O./P.P.',
+                                                                                                                    'A/4', ...],
                                                                                                                    ['C',
-                                                                                                                    'F',
-                                                                                                                    'E',
-                                                                                                                    'G',
                                                                                                                     'F '
                                                                                                                     'G',
-                                                                                                                    'D',
+                                                                                                                    'F '
+                                                                                                                    'E',
+                                                                                                                    'G',
                                                                                                                     'UNK',
-                                                                                                                    'A',
-                                                                                                                    'F '
                                                                                                                     'E',
+                                                                                                                    'F',
+                                                                                                                    'B',
                                                                                                                     'T',
-                                                                                                                    'B']],
+                                                                                                                    'D',
+                                                                                                                    'A']],
                                                                                                        drop='first',
                                                                                                        handle_unknown='ignore',
                                                                                                        min_frequency=10,
@@ -8542,39 +8544,39 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                                  ('onehotencoder',
                                                                   OneHotEncoder(categories=[['female',
                                                                                              'male'],
-                                                                                            ['C',
+                                                                                            ['S',
+                                                                                             'C',
                                                                                              'UNK',
-                                                                                             'S',
                                                                                              'Q'],
-                                                                                            ['Capt...
-                                                                                             'C.A./SOTON',
-                                                                                             'F.C.C.',
-                                                                                             'SC',
-                                                                                             'Fa',
-                                                                                             'UNK',
-                                                                                             'SC/PARIS',
-                                                                                             'SCO/W',
-                                                                                             'S.W./PP',
-                                                                                             'PP',
+                                                                                            ['Rev....
                                                                                              'SC/AH_Basle',
-                                                                                             'CA',
+                                                                                             'SC/AH',
+                                                                                             'W./C.',
+                                                                                             'WE/P',
+                                                                                             'A./5.',
+                                                                                             'P/PP',
                                                                                              'S.O.C.',
-                                                                                             'SW/PP',
-                                                                                             'S.C./PARIS',
-                                                                                             'STON/O_2.', ...],
-                                                                                            ['C',
-                                                                                             'F',
-                                                                                             'E',
-                                                                                             'G',
-                                                                                             'F '
-                                                                                             'G',
-                                                                                             'D',
                                                                                              'UNK',
-                                                                                             'A',
+                                                                                             'A/5.',
+                                                                                             'S.P.',
+                                                                                             'F.C.',
+                                                                                             'S.C./PARIS',
+                                                                                             'SCO/W',
+                                                                                             'S.O./P.P.',
+                                                                                             'A/4', ...],
+                                                                                            ['C',
+                                                                                             'F '
+                                                                                             'G',
                                                                                              'F '
                                                                                              'E',
+                                                                                             'G',
+                                                                                             'UNK',
+                                                                                             'E',
+                                                                                             'F',
+                                                                                             'B',
                                                                                              'T',
-                                                                                             'B']],
+                                                                                             'D',
+                                                                                             'A']],
                                                                                 drop='first',
                                                                                 handle_unknown='ignore',
                                                                                 min_frequency=10,
@@ -8595,68 +8597,70 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
                                                 ('onehotencoder',
                                                  OneHotEncoder(categories=[['female',
                                                                             'male'],
-                                                                           ['C',
+                                                                           ['S',
+                                                                            'C',
                                                                             'UNK',
-                                                                            'S',
                                                                             'Q'],
-                                                                           ['Capt.',
-                                                                            'Countess.',
-                                                                            'Miss.',
-                                                                            'Mr.'...
-                                                                            'W./C.',
-                                                                            'W.E.P.',
+                                                                           ['Rev.',
+                                                                            'Mrs.',
+                                                                            'Major.',
+                                                                            'Mr.',
+                                                                            'Jon...
                                                                             'A.5.',
-                                                                            'A4.',
-                                                                            'SOTON/O.Q.',
-                                                                            'A/4.',
-                                                                            'PC',
-                                                                            'W/C',
-                                                                            'C.A.',
-                                                                            'SOTON/O2',
-                                                                            'C.A./SOTON',
-                                                                            'F.C.C.',
-                                                                            'SC',
                                                                             'Fa',
-                                                                            'UNK',
-                                                                            'SC/PARIS',
-                                                                            'SCO/W',
+                                                                            'SOTON/O.Q.',
+                                                                            'STON/O2.',
+                                                                            'PC',
                                                                             'S.W./PP',
-                                                                            'PP',
-                                                                            'SC/AH_Basle',
+                                                                            'STON/O_2.',
+                                                                            'A/4.',
                                                                             'CA',
+                                                                            'W.E.P.',
+                                                                            'SC/AH_Basle',
+                                                                            'SC/AH',
+                                                                            'W./C.',
+                                                                            'WE/P',
+                                                                            'A./5.',
+                                                                            'P/PP',
                                                                             'S.O.C.',
-                                                                            'SW/PP',
-                                                                            'S.C./PARIS',
-                                                                            'STON/O_2.', ...],
-                                                                           ['C',
-                                                                            'F',
-                                                                            'E',
-                                                                            'G',
-                                                                            'F '
-                                                                            'G',
-                                                                            'D',
                                                                             'UNK',
-                                                                            'A',
+                                                                            'A/5.',
+                                                                            'S.P.',
+                                                                            'F.C.',
+                                                                            'S.C./PARIS',
+                                                                            'SCO/W',
+                                                                            'S.O./P.P.',
+                                                                            'A/4', ...],
+                                                                           ['C',
+                                                                            'F '
+                                                                            'G',
                                                                             'F '
                                                                             'E',
+                                                                            'G',
+                                                                            'UNK',
+                                                                            'E',
+                                                                            'F',
+                                                                            'B',
                                                                             'T',
-                                                                            'B']],
+                                                                            'D',
+                                                                            'A']],
                                                                drop='first',
                                                                handle_unknown='ignore',
                                                                min_frequency=10,
                                                                sparse_output=False))]))])</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><label>numeric</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-4" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-4"><div><div>Columns</div></div></label><div class="sk-toggleable__content fitted"><pre>Columns(names=['Pclass', 'Age', 'SibSp', 'Parch', 'Fare', 'Ticket_number',
-               'Cabin_number'])</pre></div> </div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><label>cat</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-5"><div><div>Columns</div></div></label><div class="sk-toggleable__content fitted"><pre>Columns(names=['Sex', 'Embarked', 'Title', 'Ticket_item', 'Cabin_letter'])</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-6"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html" rel="noreferrer" target="_blank">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(categories=[['female', 'male'], ['C', 'UNK', 'S', 'Q'],
-                          ['Capt.', 'Countess.', 'Miss.', 'Mr.', 'Ms.', 'Sir.',
-                           'Mlle.', 'Mme.', 'Master.', 'Rev.', 'Lady.', 'Mrs.',
-                           'Don.', 'Jonkheer.', 'Major.', 'Col.', 'Dr.'],
-                          ['C', 'A/5', 'CA.', 'SC/Paris', 'A/5.', 'W./C.',
-                           'W.E.P.', 'A.5.', 'A4.', 'SOTON/O.Q.', 'A/4.', 'PC',
-                           'W/C', 'C.A.', 'SOTON/O2', 'C.A./SOTON', 'F.C.C.',
-                           'SC', 'Fa', 'UNK', 'SC/PARIS', 'SCO/W', 'S.W./PP',
-                           'PP', 'SC/AH_Basle', 'CA', 'S.O.C.', 'SW/PP',
-                           'S.C./PARIS', 'STON/O_2.', ...],
-                          ['C', 'F', 'E', 'G', 'F G', 'D', 'UNK', 'A', 'F E',
-                           'T', 'B']],
+               'Cabin_number'])</pre></div> </div></div></div></div></div><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><label>cat</label></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-5" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-5"><div><div>Columns</div></div></label><div class="sk-toggleable__content fitted"><pre>Columns(names=['Sex', 'Embarked', 'Title', 'Ticket_item', 'Cabin_letter'])</pre></div> </div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-6" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-6"><div><div>OneHotEncoder</div></div><div><a class="sk-estimator-doc-link fitted" href="https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.OneHotEncoder.html" rel="noreferrer" target="_blank">?<span>Documentation for OneHotEncoder</span></a></div></label><div class="sk-toggleable__content fitted"><pre>OneHotEncoder(categories=[['female', 'male'], ['S', 'C', 'UNK', 'Q'],
+                          ['Rev.', 'Mrs.', 'Major.', 'Mr.', 'Jonkheer.',
+                           'Countess.', 'Dr.', 'Mlle.', 'Master.', 'Don.',
+                           'Capt.', 'Miss.', 'Sir.', 'Mme.', 'Col.', 'Lady.',
+                           'Ms.'],
+                          ['C', 'S.O.P.', 'W/C', 'SOTON/O2', 'PP', 'A.5.', 'Fa',
+                           'SOTON/O.Q.', 'STON/O2.', 'PC', 'S.W./PP',
+                           'STON/O_2.', 'A/4.', 'CA', 'W.E.P.', 'SC/AH_Basle',
+                           'SC/AH', 'W./C.', 'WE/P', 'A./5.', 'P/PP', 'S.O.C.',
+                           'UNK', 'A/5.', 'S.P.', 'F.C.', 'S.C./PARIS', 'SCO/W',
+                           'S.O./P.P.', 'A/4', ...],
+                          ['C', 'F G', 'F E', 'G', 'UNK', 'E', 'F', 'B', 'T',
+                           'D', 'A']],
               drop='first', handle_unknown='ignore', min_frequency=10,
               sparse_output=False)</pre></div> </div></div></div></div></div></div></div></div></div><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-7" type="checkbox"/><label class="sk-toggleable__label fitted sk-toggleable__label-arrow" for="sk-estimator-id-7"><div><div>DecisionTreeClassifier</div></div><div><a class="sk-estimator-doc-link fitted" href="https://scikit-learn.org/1.6/modules/generated/sklearn.tree.DecisionTreeClassifier.html" rel="noreferrer" target="_blank">?<span>Documentation for DecisionTreeClassifier</span></a></div></label><div class="sk-toggleable__content fitted"><pre>DecisionTreeClassifier(max_depth=10, max_leaf_nodes=15, random_state=28)</pre></div> </div></div></div></div></div></div></div></div></div></div></div>
 </div>
@@ -8684,7 +8688,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># let's see what the best hyperparameters were</span>
@@ -8699,7 +8703,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>{'model__max_depth': 10,
  'model__max_leaf_nodes': 15,
@@ -8713,7 +8717,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># let's see what the mean cross validated score for those parameters</span>
@@ -8728,9 +8732,9 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[22]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>np.float64(0.8244755244755245)</pre>
+<pre>np.float64(0.8258741258741258)</pre>
 </div>
 </div>
 </div>
@@ -8740,7 +8744,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># let's see what the score is on our full test set</span>
@@ -8755,7 +8759,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>0.8212290502793296</pre>
 </div>
@@ -8767,7 +8771,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># let's generate the decision tree plot for the best model</span>
@@ -8801,7 +8805,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># format results for Model Facts evaluation </span>
@@ -8814,7 +8818,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span class="n">X_test</span><span class="p">[</span><span class="s1">'true'</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_test</span>
 <span class="n">X_test</span><span class="p">[</span><span class="s1">'baseline'</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="s1">'Sex'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">'male'</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">'female'</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
 
-<span class="n">X_test</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'data/test_wpred.csv'</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">X_test</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'../data/test_wpred.csv'</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8827,7 +8831,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/tmp/ipykernel_142793/3058639893.py:9: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+<pre>/tmp/ipykernel_61259/292946724.py:9: FutureWarning: Downcasting behavior in `replace` is deprecated and will be removed in a future version. To retain the old behavior, explicitly call `result.infer_objects(copy=False)`. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
   X_test['baseline'] = X_test['Sex'].replace({'male':0, 'female':1})
 </pre>
 </div>
@@ -8839,15 +8843,15 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Let's see how this does on the Kaggle test set</span>
-<span class="n">kaggle_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/test.csv'</span><span class="p">)</span>
+<span class="n">kaggle_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'../data/test.csv'</span><span class="p">)</span>
 <span class="n">kaggle_df</span> <span class="o">=</span> <span class="n">tpp</span><span class="o">.</span><span class="n">preprocess_data</span><span class="p">(</span><span class="n">kaggle_df</span><span class="p">)</span>
 <span class="n">kaggle_df</span> <span class="o">=</span> <span class="n">tpp</span><span class="o">.</span><span class="n">impute_data</span><span class="p">(</span><span class="n">kaggle_df</span><span class="p">)</span>
 <span class="n">kaggle_df</span><span class="p">[</span><span class="s1">'Survived'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gridcv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">kaggle_df</span><span class="p">)</span>
-<span class="n">kaggle_df</span><span class="p">[[</span><span class="s1">'PassengerId'</span><span class="p">,</span> <span class="s1">'Survived'</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'data/kaggle_pred.csv'</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> 
+<span class="n">kaggle_df</span><span class="p">[[</span><span class="s1">'PassengerId'</span><span class="p">,</span> <span class="s1">'Survived'</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'../data/kaggle_pred.csv'</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> 
 <span class="c1"># 76555% accuracy</span>
 </pre></div>
 </div>
@@ -8888,16 +8892,16 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">src.modelfacts.mfl</span><span class="w"> </span><span class="kn">import</span>  <span class="n">ModelFacts</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">modelfacts</span><span class="w"> </span><span class="kn">import</span>  <span class="n">ModelFacts</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">metrics</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dt</span>
 <span class="c1"># read in data</span>
-<span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/train.csv'</span><span class="p">)</span>
-<span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'data/test_wpred.csv'</span><span class="p">)</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'../data/train.csv'</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'../data/test_wpred.csv'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8908,7 +8912,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">test_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -8922,7 +8926,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[31]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -9062,7 +9066,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># set admin details</span>
@@ -9089,7 +9093,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># define scoring functions</span>
@@ -9109,7 +9113,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># create model facts object</span>
@@ -9130,7 +9134,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># create the Model Facts label from the data</span>
@@ -9147,52 +9151,52 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div id="dglvnbzshu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="amrsxavpou" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>
-#dglvnbzshu table {
+#amrsxavpou table {
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
         }
 
-#dglvnbzshu thead, tbody, tfoot, tr, td, th { border-style: none; }
+#amrsxavpou thead, tbody, tfoot, tr, td, th { border-style: none; }
  tr { background-color: transparent; }
-#dglvnbzshu p { margin: 0; padding: 0; }
- #dglvnbzshu .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
- #dglvnbzshu .gt_caption { padding-top: 4px; padding-bottom: 4px; }
- #dglvnbzshu .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
- #dglvnbzshu .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
- #dglvnbzshu .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
- #dglvnbzshu .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
- #dglvnbzshu .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
- #dglvnbzshu .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
- #dglvnbzshu .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
- #dglvnbzshu .gt_column_spanner_outer:first-child { padding-left: 0; }
- #dglvnbzshu .gt_column_spanner_outer:last-child { padding-right: 0; }
- #dglvnbzshu .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
- #dglvnbzshu .gt_spanner_row { border-bottom-style: hidden; }
- #dglvnbzshu .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
- #dglvnbzshu .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
- #dglvnbzshu .gt_from_md> :first-child { margin-top: 0; }
- #dglvnbzshu .gt_from_md> :last-child { margin-bottom: 0; }
- #dglvnbzshu .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
- #dglvnbzshu .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
- #dglvnbzshu .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
- #dglvnbzshu .gt_row_group_first td { border-top-width: 2px; }
- #dglvnbzshu .gt_row_group_first th { border-top-width: 2px; }
- #dglvnbzshu .gt_striped { background-color: rgba(128,128,128,0.05); }
- #dglvnbzshu .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
- #dglvnbzshu .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
- #dglvnbzshu .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
- #dglvnbzshu .gt_left { text-align: left; }
- #dglvnbzshu .gt_center { text-align: center; }
- #dglvnbzshu .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
- #dglvnbzshu .gt_font_normal { font-weight: normal; }
- #dglvnbzshu .gt_font_bold { font-weight: bold; }
- #dglvnbzshu .gt_font_italic { font-style: italic; }
- #dglvnbzshu .gt_super { font-size: 65%; }
- #dglvnbzshu .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
- #dglvnbzshu .gt_asterisk { font-size: 100%; vertical-align: 0; }
+#amrsxavpou p { margin: 0; padding: 0; }
+ #amrsxavpou .gt_table { display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; }
+ #amrsxavpou .gt_caption { padding-top: 4px; padding-bottom: 4px; }
+ #amrsxavpou .gt_title { color: #333333; font-size: 125%; font-weight: initial; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; border-bottom-color: #FFFFFF; border-bottom-width: 0; }
+ #amrsxavpou .gt_subtitle { color: #333333; font-size: 85%; font-weight: initial; padding-top: 3px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; border-top-color: #FFFFFF; border-top-width: 0; }
+ #amrsxavpou .gt_heading { background-color: #FFFFFF; text-align: center; border-bottom-color: #FFFFFF; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #amrsxavpou .gt_bottom_border { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #amrsxavpou .gt_col_headings { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; }
+ #amrsxavpou .gt_col_heading { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; overflow-x: hidden; }
+ #amrsxavpou .gt_column_spanner_outer { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: normal; text-transform: inherit; padding-top: 0; padding-bottom: 0; padding-left: 4px; padding-right: 4px; }
+ #amrsxavpou .gt_column_spanner_outer:first-child { padding-left: 0; }
+ #amrsxavpou .gt_column_spanner_outer:last-child { padding-right: 0; }
+ #amrsxavpou .gt_column_spanner { border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: bottom; padding-top: 5px; padding-bottom: 5px; overflow-x: hidden; display: inline-block; width: 100%; }
+ #amrsxavpou .gt_spanner_row { border-bottom-style: hidden; }
+ #amrsxavpou .gt_group_heading { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; text-align: left; }
+ #amrsxavpou .gt_empty_group_heading { padding: 0.5px; color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; vertical-align: middle; }
+ #amrsxavpou .gt_from_md> :first-child { margin-top: 0; }
+ #amrsxavpou .gt_from_md> :last-child { margin-bottom: 0; }
+ #amrsxavpou .gt_row { padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; }
+ #amrsxavpou .gt_stub { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; }
+ #amrsxavpou .gt_stub_row_group { color: #333333; background-color: #FFFFFF; font-size: 100%; font-weight: initial; text-transform: inherit; border-right-style: solid; border-right-width: 2px; border-right-color: #D3D3D3; padding-left: 5px; padding-right: 5px; vertical-align: top; }
+ #amrsxavpou .gt_row_group_first td { border-top-width: 2px; }
+ #amrsxavpou .gt_row_group_first th { border-top-width: 2px; }
+ #amrsxavpou .gt_striped { background-color: rgba(128,128,128,0.05); }
+ #amrsxavpou .gt_table_body { border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; }
+ #amrsxavpou .gt_sourcenotes { color: #333333; background-color: #FFFFFF; border-bottom-style: none; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; }
+ #amrsxavpou .gt_sourcenote { font-size: 90%; padding-top: 4px; padding-bottom: 4px; padding-left: 5px; padding-right: 5px; text-align: left; }
+ #amrsxavpou .gt_left { text-align: left; }
+ #amrsxavpou .gt_center { text-align: center; }
+ #amrsxavpou .gt_right { text-align: right; font-variant-numeric: tabular-nums; }
+ #amrsxavpou .gt_font_normal { font-weight: normal; }
+ #amrsxavpou .gt_font_bold { font-weight: bold; }
+ #amrsxavpou .gt_font_italic { font-style: italic; }
+ #amrsxavpou .gt_super { font-size: 65%; }
+ #amrsxavpou .gt_footnote_marks { font-size: 75%; vertical-align: 0.4em; position: initial; }
+ #amrsxavpou .gt_asterisk { font-size: 100%; vertical-align: 0; }
  
 </style>
 <table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
@@ -9293,7 +9297,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <th class="gt_group_heading" colspan="4" style="color: Black;font-weight: bold;">Age</th>
 </tr>
 <tr>
-<th class="gt_row gt_left gt_stub">18</th>
+<th class="gt_row gt_left gt_stub">&lt;18</th>
 <td class="gt_row gt_left">13.4</td>
 <td class="gt_row gt_left">0.792</td>
 <td class="gt_row gt_left">54.2</td>
@@ -9331,7 +9335,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </tbody>
 <tfoot class="gt_sourcenotes">
 <tr>
-<td class="gt_sourcenote" colspan="4"><span style="color:red"><strong>Warnings: This model was trained only on Titanic passengers for demonstration purposes. It should not be used to evaluate other scenarios.</strong></span></td>
+<td class="gt_sourcenote" colspan="4"><span style="color:red">**Warnings: This model was trained only on Titanic passengers for demonstration purposes. It should not be used to evaluate other scenarios.**</span></td>
 </tr>
 <tr>
 <td class="gt_sourcenote" colspan="4">Data from https://www.kaggle.com/c/titanic/data. Model trained by github.com/jhzsquared.</td>
@@ -9351,7 +9355,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># save Model Facts into a file </span>
@@ -9381,7 +9385,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [37]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">female_df</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="n">test_df</span><span class="p">[</span><span class="s1">'Sex'</span><span class="p">]</span><span class="o">==</span><span class="s2">"female"</span><span class="p">]</span>
@@ -9405,6 +9409,20 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
 <img alt="No description has been provided for this image" class="" src="data:image/png;base64,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"/>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
 </div>
 </div>
 </div>

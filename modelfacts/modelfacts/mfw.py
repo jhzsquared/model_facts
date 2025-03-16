@@ -5,7 +5,7 @@ import io
 import pandas as pd
 from sklearn import metrics
 
-from ..modelfacts.mfl import  ModelFacts
+from .mfl import  ModelFacts
 
 class ModelFactsWidget(ipyw.VBox):
     '''Generate a form to create a Model Facts label
