@@ -51,20 +51,22 @@ table = mf_label(application, warning, source, show=True)
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
+Make sure to update tests as appropriate.
 
-Please reach out if you are interested in joining the team for continued development of this project
+Reach out if you are interested in joining the team for continued development of this project
 
 ## Limitations
-The automated calculation code currently only supports binary classification and regressions. But users can use their own calculations and the `modelfacts.ModelFactsLabel` to generate a label from their own statistics
+The automated calculation code currently only supports binary classification and regressions. 
+Users can use their own calculations and the `modelfacts.ModelFactsLabel` to generate a label from their own statistics.
 
 ## License
 Model Facts is licensed under the MIT license.
 ## Citation
-This project was developed as a follow-up to the following paper. Please cite the following if you are using Model Facts labels!
+This project was developed as a follow-up to the following paper. Please cite the following if you are using Model Facts labels:
 
+```
 Jessica Zhu, Michel Cukier, Joseph Richardson, Nutrition facts, drug facts, and model facts: putting AI ethics into practice in gun violence research, Journal of the American Medical Informatics Association, Volume 31, Issue 10, October 2024, Pages 2414–2421, https://doi.org/10.1093/jamia/ocae102
-
+```
 or 
 
 ```
