@@ -1,7 +1,7 @@
 # Model Facts
-Create a Model Facts label to improve the transparency of your model when communicating with end users. 
+Create a Model Facts label to increase trust and improve the transparency of your model when communicating with end users. 
 This label provides a framework to interrogate models for biases. 
-It provides information required for comparability in a simple and flexible format. 
+It provides information necessary for comparability in a simple and flexible format. 
 
 Last Updated: 
 18 March, 2025
@@ -58,7 +58,7 @@ Reach out if you are interested in joining the team for continued development of
 ## Limitations
 The automated calculation code currently only supports binary classification and regressions. 
 Users can use their own calculations and the `modelfacts.ModelFactsLabel` to generate a label from their own statistics.
-
+ 
 ## License
 Model Facts is licensed under the MIT license.
 ## Citation
