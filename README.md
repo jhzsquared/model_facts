@@ -1,7 +1,8 @@
 # Model Facts
 Create a Model Facts label to increase trust and improve the transparency of your model when communicating with end users. 
-This label provides a framework to interrogate models for biases. 
-It provides information necessary for comparability in a simple and flexible format. 
+
+This label provides a framework to interrogate models for biases and accuracy.
+It highlights the necessary information for comparing models in a simple and flexible format. 
 
 Last Updated: 
 18 March, 2025
@@ -24,7 +25,7 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-Model Facts is designed to be flexible, whether you have pre-formatted data and results and just want to fill out a template, or want to generate your own statistics.
+Model Facts is designed to be flexible, whether you have formatted results and just want to fill out a template, or want to generate your own statistics.
 
 ### Template
 1. Download the `model_facts_template.ipynb` notebook.
