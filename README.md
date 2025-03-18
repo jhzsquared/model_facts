@@ -64,9 +64,9 @@ Model Facts is licensed under the MIT license.
 ## Citation
 This project was developed as a follow-up to the following paper. Please cite the following if you are using Model Facts labels:
 
-```
+
 Jessica Zhu, Michel Cukier, Joseph Richardson, Nutrition facts, drug facts, and model facts: putting AI ethics into practice in gun violence research, Journal of the American Medical Informatics Association, Volume 31, Issue 10, October 2024, Pages 2414–2421, https://doi.org/10.1093/jamia/ocae102
-```
+
 or 
 
 ```
