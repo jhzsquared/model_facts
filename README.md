@@ -28,10 +28,10 @@ Model Facts is designed to be flexible, whether you have pre-formatted data and 
 
 ### Template
 1. Download the `model_facts_template.ipynb` notebook.
-2. Create a csv file with the test data, the aligned demographic variables, predictions, baseline, and truth values.
-3. Run the first code cell
-4. Fill out the form
-5. Profit! :)
+1. Create a csv file with the test data, the aligned demographic variables, predictions, baseline, and truth values.
+1. Run the first code cell
+1. Fill out the form
+1. Profit! :)
 
 Note: the template currently only supports metrics from `scikit-learn.metrics`, binary classification, and regression models. For more complex modeling problems, please reference the other workflows.
 
