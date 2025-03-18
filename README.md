@@ -12,7 +12,7 @@ Last Updated:
 ## Installation
 It can be installed from PyPI using: 
 
-```pip install great_tables```
+```pip install modelfacts```
 
 Note: the template notebooks are only available in the source distribution.
 

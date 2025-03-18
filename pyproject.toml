@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.sdist]
 include = [
-  "src/*",
+  "modelfacts/*",
   "*.ipynb", 
   "requirements.txt"
 ]
@@ -14,7 +14,7 @@ sources = ["src"]
 
 [project]
 name = "ModelFacts"
-version = "0.0.3"
+version = "0.0.1"
 authors = [
   {name="Jessica Zhu", email="jhzsquared@gmail.com" },
 ]
