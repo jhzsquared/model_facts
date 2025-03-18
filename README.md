@@ -4,7 +4,7 @@ This label provides a framework to interrogate models for biases.
 It provides information required for comparability in a simple and flexible format. 
 
 ## Framework
-<img src="https://raw.githubusercontent.com/jhzsquared/model_facts/blob/main/model_facts.png", width = 200 />
+<img src="https://raw.githubusercontent.com/jhzsquared/model_facts/blob/main/model_facts.png" alt = "Model Facts" width = 200 />
 
 ## Installation
 It can be installed from PyPI using: 
