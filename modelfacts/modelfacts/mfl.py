@@ -15,7 +15,9 @@ class ModelFacts():
     '''
     age_bins = [0, 18, 25, 35, 50, 65, np.inf]
     labels = ['<18','18-24', '25-34', '35-49', '50-64', '64+']
-    def __init__(self, df, true, pred, baseline, st_func, t_func, classification = True):
+    def __init__(self, df, true, pred, baseline, st_func, t_func, 
+                 classification = True, pred_proba = None, baseline_proba = None,
+                 st_proba = False, t_proba = False):
         '''Set key Model Facts details
         Parameters
         ----------
@@ -36,6 +38,16 @@ class ModelFacts():
         classification: bool, optional
             True if it is a classification model. 
             False if a regression (continuous prediction) model
+        pred_proba: str, optional
+            Name of prediction probabilities 
+            for calculating a score like AUC
+        baseline_proba: str, optional
+            Name of baseline prediction probabilities 
+            for calculating a score like AUC
+        st_proba: bool, optional
+            If True, the score use the probability column
+        t_proba: bool, optional
+            If True, the score uses the probability column
         '''
         self.df = df
         self.true = true
@@ -44,6 +56,10 @@ class ModelFacts():
         self.st_func = st_func
         self.t_func = t_func
         self.type = classification
+        self.pred_proba = pred_proba
+        self.baseline_proba = baseline_proba
+        self.st_proba = st_proba
+        self.t_proba = t_proba
 
     def __call__( self, demo_groups, age_col=None, 
              train_date = None, test_data_date = None,
@@ -86,10 +102,15 @@ class ModelFacts():
             '%Train/%Test': data_split }
         admin_data = pd.DataFrame.from_dict(admin, orient = 'index')
         acc_data = {}
-        acc_data['Standard Score'] = self.calc_accuracy(self.st_func, **st_kwargs)
-        acc_data['Training Score'] = self.calc_accuracy(self.t_func, **t_kwargs)
+        acc_data['Standard Score'] = self.calc_accuracy(self.st_func, 
+                                                       self.st_proba,
+                                                        **st_kwargs)
+        acc_data['Training Score'] = self.calc_accuracy(self.t_func, 
+                                                        self.t_proba,
+                                                        **t_kwargs)
         acc_data = pd.DataFrame(acc_data).T
         demo_data = []
+        demo_groups = [d for d in demo_groups if d!=age_col]
         for demo in demo_groups:
             demo_data.append(self.calc_demo(demo, age = False))
         if age_col:
@@ -98,26 +119,32 @@ class ModelFacts():
         model_facts_data = (admin_data, acc_data, demo_data)
         return model_facts_data
     
-    def calc_accuracy(self, score_func,**kwargs):
+    def calc_accuracy(self, score_func, proba, **kwargs):
         '''Calculate Model Facts Accuracy section
         Obtain the core name, scores, and percent over baseline
         Parameters:
-            self
             score_func: function for metrics calculation, must take format f(true, pred, *kwargs)
+            proba: bool, True if using a probability scoring function
             kwargs: dict, score specific keyword arguments
         Return:
             dict
         '''
-        raw = score_func(self.df[self.true], self.df[self.pred], **kwargs)
-        baseline = score_func(self.df[self.true], self.df[self.baseline], **kwargs)
-        perc_over = 100*(raw/baseline-1)
+        if proba:
+            pred = self.pred_proba
+            baseline = self.baseline_proba
+        else:
+            pred = self.pred
+            baseline = self.baseline
+        raw = score_func(self.df[self.true], self.df[pred], **kwargs)
+        baseline = score_func(self.df[self.true], self.df[baseline], **kwargs)
+        perc_over = 100*(raw-baseline)/baseline
         return {'Name': score_func.__name__, 'Raw Score': raw, '% Over Baseline': perc_over}
 
-    def calc_demo(self, demo_col, age =  False):
+    def calc_demo(self, demo_col, age =  False, proba = False):
         '''Calculate Model Facts demographics section
         Per demographic group, obtain:
          - % samples in the test data
-         - the 'accuracy' score within that group (per the predefined training score metric)
+         - the 'accuracy' score within that group (per the predefined standard score metric)
          - the target class distribution in the test data
             - the % Target (if a classification model)
             or 
@@ -126,9 +153,14 @@ class ModelFacts():
         Parameters:
             demo_col: str, name of 1 demographic column
             age: bool, True if demo_col is the age column
+            proba: bool, True if using a probability based scoring function
         Returns:
             dataframe
         '''
+        if proba:
+            pred = self.pred_proba
+        else:
+            pred = self.pred
         if age:
             age_cut = pd.cut(self.df[demo_col], bins = self.age_bins, right = False, labels= self.labels)
             groups = self.df.groupby(age_cut, observed = True)
@@ -136,20 +168,20 @@ class ModelFacts():
             groups = self.df.groupby(demo_col, observed = False)
         data = {}
         if self.type:
-            data = groups[[demo_col, self.true, self.pred]].apply( lambda x: 
+            data = groups[[demo_col, self.true, pred]].apply( lambda x: 
                     (x[demo_col].count()/len(self.df) * 100, # % in test data
-                    self.t_func(x[self.true], x[self.pred]), # accuracy
+                    self.st_func(x[self.true], x[pred]), # accuracy
                     x[self.true].sum()/x[self.true].count() * 100)) # % in target
             data = pd.DataFrame(data.tolist(), 
-                    columns = ['% in Test Data', 'Training Score', '% Target'], 
+                    columns = ['% in Test Data', 'Standard Score', '% Target'], 
                     index = data.index)
         else:
-            data = groups[[demo_col, self.true, self.pred]].apply( lambda x: 
+            data = groups[[demo_col, self.true, pred]].apply( lambda x: 
                     (x[demo_col].count()/len(self.df)*100,  # % in test data
-                    self.t_func(x[self.true], x[self.pred]), 
+                    self.st_func(x[self.true], x[pred]), 
                     (x[self.true].mean(), x[self.true].std()))) # (target mean/std)
             data = pd.DataFrame(data.tolist(), 
-                    columns = ['% in Test Data', 'Training Score', 'Mean, Std'], 
+                    columns = ['% in Test Data', 'Standard Score', 'Mean, Std'], 
                     index = data.index)
         data['grp'] = demo_col
         return data
@@ -231,8 +263,9 @@ class ModelFactsLabel():
 
         demo_data = self.demo.copy()
         demo_index = demo_data.index
+        notna_index = demo_data[~demo_data['Standard Score'].isna()].index
         demo_data.loc['Demographics'] = demo_data.columns
-        demo_data.rename(columns={'% in Test Data':0, 'Training Score':1, '% Target':2, 'Mean, Std': 2}, inplace= True)
+        demo_data.rename(columns={'% in Test Data':0, 'Standard Score':1, '% Target':2, 'Mean, Std': 2}, inplace= True)
         demo_data = demo_data.reindex(['Demographics']+list(demo_index))
 
         data = pd.concat([self.admin, acc_data, demo_data])
@@ -250,7 +283,14 @@ class ModelFactsLabel():
             warning = f"Warnings: {warning}"
         if source == "":
             source = "Unknown data and model source"
-        instructions = "How to use Model Facts: The first section, “Application” through “Test Data Date” is to check that this model is relevant and timely for your goals. Use the accuracy “Standard Score” to compare it to other models. Use the demographic breakdown to check for biases in protected attributes (eg, if one race is underrepresented in the “% Test Data” or “% Target” or has a low accuracy compared to the overall model’s “Training Score”)."
+        instructions = "How to use Model Facts: " \
+        "The first section, &quot;Application&quot; through &quot;Test Data Date&quot;" \
+        " is to check that this model is relevant and timely for your goals. " \
+        "Use the accuracy &quot;Standard Score&quot; to compare it to other models. " \
+        "Use the demographic breakdown to check for biases in protected attributes " \
+        "(eg, if one race is underrepresented in the &quot;% Test Data&quot; " \
+        "or &quot;% Target&quot; or has a large difference in accuracy " \
+        "compared to the overall model&#39;s &quot;Standard Score&quot;)."
         table = (
             GT(data, rowname_col="index", groupname_col="grp")
             .tab_header(title="Model Facts", subtitle = f"Application: {application}")
@@ -272,7 +312,8 @@ class ModelFactsLabel():
             .tab_source_note(md(f'<small>{instructions}</small>'))
             .cols_label({'0':'', '1': '', '2':''})
             .fmt_number(rows = list(acc_index), columns = [1,2], n_sigfig = 3)
-            .fmt_number(rows = list(demo_index), columns = [0,1,2], n_sigfig = 3)
+            .fmt_number(rows = list(notna_index), columns = [1], n_sigfig = 3)
+            .fmt_number(rows = list(demo_index), columns = [0, 2], n_sigfig = 3)
             .fmt_date(rows = ['Model Train Date', 'Test Data Date'], columns = 0, date_style = 'day_month_year')
         )
         if show:

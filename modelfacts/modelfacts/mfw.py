@@ -107,6 +107,15 @@ class ModelFactsWidget(ipyw.VBox):
             layout = items_layout
         )
 
+        # select if any of the scores are probability based
+        self.score_proba = ipyw.RadioButtons(
+            options = ['None', 'Standard Score', 'Training Score', 'Both'],
+            description = 'Are any of the scores probability based?',
+            disabled=False,
+            style = style,
+            layout = items_layout
+        )
+
         # upload data
         self.test_data = ipyw.FileUpload(accept = '.csv', description = "Upload Test data")
 
@@ -126,6 +135,7 @@ class ModelFactsWidget(ipyw.VBox):
             self.data_date,
             self.st_score,
             self.t_score,
+            self.score_proba,
             self.data_size,
             self.data_split,
             self.test_data,
@@ -160,6 +170,7 @@ class ModelFactsWidget(ipyw.VBox):
             style = style,
             layout = items_layout
         )
+        # instructions       
         complete = ipyw.Label(
             value = 'Run next cell when the form is filled out',
             style = dict(
@@ -187,12 +198,23 @@ class ModelFactsWidget(ipyw.VBox):
         st_score_func = getattr(metrics, st_score)
         t_score = self.t_score.value
         score_func = getattr(metrics, t_score)
+        st_proba = False
+        t_proba = False
+        if self.score_proba.value == 'Both':
+            st_proba = True
+            t_proba = True
+        elif self.score_proba.value == "Standard Score":
+            st_proba = True
+        elif self.score_proba.value =="Training Score":
+            t_proba = True
         # get demographic columns
         demo_cols = self.widget_holder.children[0].value
         age_col = self.widget_holder.children[1].value
         demo_cols = [i for i in demo_cols if i!=age_col]
         model_facts = ModelFacts(self.test_df, 'true', 'pred', 'baseline',
-                                 st_score_func, score_func, classification = model_type)
+                                 st_score_func, score_func, classification = model_type,
+                                 pred_proba ="pred_proba", baseline_proba = "baseline_proba", 
+                                 st_proba = st_proba, t_proba = t_proba)
         mf_titanic = model_facts(demo_cols, age_col = age_col,
             train_date = train_date, test_data_date = test_data_date,
             data_size = data_size, data_split = data_split)
