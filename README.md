@@ -27,6 +27,9 @@ pip install -r requirements.txt
 ## Usage
 Model Facts is designed to be flexible, whether you have formatted results and just want to fill out a template, or want to generate your own statistics.
 
+
+Additional background information and resources are discussed in our paper: https://doi.org/10.1093/jamia/ocae102, as well as our presentation at the 2025 INFORMS Analytics+ conference. The slide deck is shared as the file `informs_modelfacts_presentation.pptx`.
+
 ### Template
 1. Download the `model_facts_template.ipynb` notebook.
 1. Create a csv file with the test data, the aligned demographic variables, predictions, baseline, and truth values.
