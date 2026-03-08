@@ -181,7 +181,7 @@ class ModelFacts():
                     self.st_func(x[self.true], x[pred]), 
                     (x[self.true].mean(), x[self.true].std()))) # (target mean/std)
             data = pd.DataFrame(data.tolist(), 
-                    columns = ['% in Test Data', 'Standard Score', 'Mean, Std'], 
+                    columns = ['% in Test Data', 'Standard Score', 'Mean', 'Std'], 
                     index = data.index)
         data['grp'] = demo_col
         return data
