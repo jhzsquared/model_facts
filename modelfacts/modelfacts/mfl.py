@@ -135,8 +135,8 @@ class ModelFacts():
         else:
             pred = self.pred
             baseline = self.baseline
-        raw = score_func(self.df[self.true], self.df[pred], **kwargs)
-        baseline = score_func(self.df[self.true], self.df[baseline], **kwargs)
+        raw = score_func(self.df[self.true].astype(float), self.df[pred].astype(float), **kwargs)
+        baseline = score_func(self.df[self.true].astype(float), self.df[baseline].astype(float), **kwargs)
         perc_over = 100*(raw-baseline)/baseline
         return {'Name': score_func.__name__, 'Raw Score': raw, '% Over Baseline': perc_over}
 
@@ -170,7 +170,7 @@ class ModelFacts():
         if self.type:
             data = groups[[demo_col, self.true, pred]].apply( lambda x: 
                     (x[demo_col].count()/len(self.df) * 100, # % in test data
-                    self.st_func(x[self.true], x[pred]), # accuracy
+                    self.st_func(x[self.true].astype(float), x[pred].astype(float)), # accuracy
                     x[self.true].sum()/x[self.true].count() * 100)) # % in target
             data = pd.DataFrame(data.tolist(), 
                     columns = ['% in Test Data', 'Standard Score', '% Target'], 
@@ -178,7 +178,7 @@ class ModelFacts():
         else:
             data = groups[[demo_col, self.true, pred]].apply( lambda x: 
                     (x[demo_col].count()/len(self.df)*100,  # % in test data
-                    self.st_func(x[self.true], x[pred]), 
+                    self.st_func(x[self.true].astype(float), x[pred].astype(float)), 
                     (x[self.true].mean(), x[self.true].std()))) # (target mean/std)
             data = pd.DataFrame(data.tolist(), 
                     columns = ['% in Test Data', 'Standard Score', 'Mean, Std'], 
